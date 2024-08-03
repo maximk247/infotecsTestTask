@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
-import UserSearch from '../components/user/search/UserSearch';
+import UserSearch from '../components/user/Search/UserSearch';
 
 describe('UserSearch', () => {
   const onSearch = vi.fn();

@@ -1,0 +1,24 @@
+.headerCell {
+  padding: 12px 15px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+
+  &.noPointer {
+    cursor: default;
+  }
+}
+
+.cellContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sort-arrow {
+  margin-left: 5px;
+}

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import UserSearch from '../components/user/search/UserSearch';
-import UserTableHeader from '../components/user/table/header/UserTableHeader';
-import UserTableBody from '../components/user/table/body/UserTableBody';
+import UserSearch from '../components/user/Search/UserSearch';
+import UserTableHeader from '../components/user/table/Header/UserTableHeader';
+import UserTableBody from '../components/user/table/Body/UserTableBody';
 import { RootState } from '../reducers';
 import {
   fetchUsers,
@@ -13,7 +13,7 @@ import {
   setSearchKey,
   setSelectedUser,
 } from '../reducers/userSlice';
-import Pagination from '../components/shared/Pagination';
+import Pagination from '../components/shared/Pagination/Pagination';
 import { AppDispatch } from '../store';
 
 const UserTableContainer: React.FC = () => {
@@ -83,7 +83,7 @@ const UserTableContainer: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className="table-container">
       <UserSearch
         searchTerm={searchTerm}
         searchKey={searchKey}
@@ -94,7 +94,7 @@ const UserTableContainer: React.FC = () => {
         <p>Loading...</p>
       ) : users.length > 0 ? (
         <>
-          <table>
+          <table className="table">
             <UserTableHeader
               columnWidths={{
                 firstName: 150,

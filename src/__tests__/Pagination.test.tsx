@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
-import Pagination from '../components/shared/Pagination';
+import Pagination from '../components/shared/Pagination/Pagination';
 
 describe('Pagination', () => {
   const onPreviousPage = vi.fn();

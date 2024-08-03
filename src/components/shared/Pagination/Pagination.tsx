@@ -1,7 +1,12 @@
 import React from 'react';
-import { PaginationProps } from './interfaces/pagination.interface';
+import { PaginationProps } from '../interfaces/pagination.interface';
 
-const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPreviousPage, onNextPage }) => {
+const Pagination: React.FC<PaginationProps> = ({
+  currentPage,
+  totalPages,
+  onPreviousPage,
+  onNextPage,
+}) => {
   return (
     <div>
       <button onClick={onPreviousPage} disabled={currentPage === 1}>

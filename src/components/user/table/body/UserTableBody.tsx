@@ -1,37 +1,45 @@
 import React from 'react';
 import { UserTableBodyProps } from '../interfaces/user-table-body.interface';
-import UserTableCell from '../table-cell/UserTableCell';
+import UserTableBodyCell from '../table-cell/Body/UserTableBodyCell';
+import { User } from '../../interfaces/user.interface';
 
 const UserTableBody: React.FC<UserTableBodyProps> = ({
   users,
   onRowClick,
   columnWidths,
 }) => {
+  const handleRowClick = (user: User) => () => {
+    const selection = window.getSelection();
+    if (!selection || selection.toString().length === 0) {
+      onRowClick(user);
+    }
+  };
+
   return (
     <tbody>
       {users.map((user) => (
-        <tr key={user.id} onClick={() => onRowClick(user)}>
-          <UserTableCell
+        <tr key={user.id} onMouseUp={handleRowClick(user)}>
+          <UserTableBodyCell
             content={`${user.firstName} ${user.lastName}`}
             maxWidth={columnWidths.firstName}
             minWidth={50}
           />
-          <UserTableCell
+          <UserTableBodyCell
             content={user.age}
             maxWidth={columnWidths.age}
             minWidth={50}
           />
-          <UserTableCell
+          <UserTableBodyCell
             content={user.gender}
             maxWidth={columnWidths.gender}
             minWidth={50}
           />
-          <UserTableCell
+          <UserTableBodyCell
             content={user.phone}
             maxWidth={columnWidths.phone}
             minWidth={50}
           />
-          <UserTableCell
+          <UserTableBodyCell
             content={`${user.address.city}, ${user.address.address}`}
             maxWidth={columnWidths.addressCity}
             minWidth={50}

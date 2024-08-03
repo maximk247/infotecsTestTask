@@ -1,7 +1,6 @@
-// src/components/UserTableHeader.tsx
 import React from 'react';
 import { UserTableHeaderProps } from '../interfaces/user-table-header.interface';
-import UserTableHeaderCell from '../table-cell/UserTableHeaderCell';
+import UserTableHeaderCell from '../table-cell/Header/UserTableHeaderCell';
 
 const UserTableHeader: React.FC<UserTableHeaderProps> = ({
   columnWidths,

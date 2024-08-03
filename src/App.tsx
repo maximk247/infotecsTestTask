@@ -1,6 +1,6 @@
 import React from 'react';
 import UserTableContainer from './containers/UserTableContainer';
-import UserModal from './components/user/modal/UserModal';
+import UserModal from './components/user/Modal/UserModal';
 import './index.scss';
 const App: React.FC = () => {
   return (

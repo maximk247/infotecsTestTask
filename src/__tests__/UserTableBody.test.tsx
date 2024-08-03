@@ -2,7 +2,7 @@ import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { UserTableBodyProps } from '../components/user/table/interfaces/user-table-body.interface';
-import UserTableBody from '../components/user/table/body/UserTableBody';
+import UserTableBody from '../components/user/table/Body/UserTableBody';
 import { User } from '../components/user/interfaces/user.interface';
 
 const users: User[] = [

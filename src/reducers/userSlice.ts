@@ -24,6 +24,7 @@ export const fetchFilteredUsers = createAsyncThunk<
 
 const initialState: UserState = {
   users: [],
+  unsortedUsers: [],
   loading: false,
   error: null,
   searchTerm: '',
@@ -42,12 +43,17 @@ const sortUsers = (
   users: User[],
   sortConfig: { key: string; direction: string }
 ) => {
+  if (!sortConfig.direction) return users; 
   return [...users].sort((a, b) => {
     const aValue = getValueByPath(a, sortConfig.key);
     const bValue = getValueByPath(b, sortConfig.key);
     const direction = sortConfig.direction === 'asc' ? 1 : -1;
-    if (aValue < bValue) return -1 * direction;
-    if (aValue > bValue) return 1 * direction;
+    if (aValue < bValue) {
+      return -1 * direction;
+    }
+    if (aValue > bValue) {
+      return 1 * direction;
+    }
     return 0;
   });
 };
@@ -67,7 +73,11 @@ const userSlice = createSlice({
       action: PayloadAction<{ key: string; direction: string }>
     ) {
       state.sortConfig = action.payload;
-      state.users = sortUsers(state.users, action.payload);
+      if (action.payload.direction === '') {
+        state.users = [...state.unsortedUsers];
+      } else {
+        state.users = sortUsers([...state.unsortedUsers], action.payload);
+      }
     },
     setPage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
@@ -84,7 +94,8 @@ const userSlice = createSlice({
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.loading = false;
-        state.users = sortUsers(action.payload, state.sortConfig);
+        state.unsortedUsers = action.payload; 
+        state.users = sortUsers([...state.unsortedUsers], state.sortConfig);
       })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.loading = false;
@@ -96,7 +107,8 @@ const userSlice = createSlice({
       })
       .addCase(fetchFilteredUsers.fulfilled, (state, action) => {
         state.loading = false;
-        state.users = sortUsers(action.payload, state.sortConfig);
+        state.unsortedUsers = action.payload;
+        state.users = sortUsers([...state.unsortedUsers], state.sortConfig);
       })
       .addCase(fetchFilteredUsers.rejected, (state, action) => {
         state.loading = false;
