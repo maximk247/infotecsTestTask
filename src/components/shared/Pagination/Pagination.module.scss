@@ -6,28 +6,37 @@
   justify-content: flex-end;
   margin-top: 20px;
 
-  button {
-    background-color: $button-bg;
-    border: 1px solid $primary-color;
-    color: $primary-color;
-    padding: 5px 10px;
-    margin: 0 5px;
-    cursor: pointer;
-    border-radius: 4px;
-
-    &:hover {
-      background-color: $button-hover-bg;
-    }
-
-    &:disabled {
-      background-color: $disabled-color;
-      color: $disabled-color-text;
-      cursor: not-allowed;
-    }
-  }
-
   span {
     margin: 0 10px;
     color: $primary-color;
   }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin: 0 5px;
+  cursor: pointer;
+  color: $primary-color;
+
+  &:hover {
+    background-color: $button-hover-bg;
+  }
+
+  &:disabled {
+    color: $disabled-color-text;
+    cursor: not-allowed;
+  }
+}
+
+.rotate {
+  transform: rotate(180deg);
 }

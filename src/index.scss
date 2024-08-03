@@ -17,6 +17,11 @@ body {
   min-height: 100vh;
 }
 
+button {
+  border: none;
+  background-color: inherit;
+}
+
 .table-container {
   max-width: 1200px;
   width: 100%;
@@ -40,4 +45,3 @@ body {
   background-color: $row-hover-bg;
   cursor: pointer;
 }
-
