@@ -66,12 +66,8 @@ const UserTableContainer: React.FC = () => {
     return '';
   };
 
-  const handleNextPage = () => {
-    dispatch(setPage(Math.min(currentPage + 1, totalPages)));
-  };
-
-  const handlePreviousPage = () => {
-    dispatch(setPage(Math.max(currentPage - 1, 1)));
+  const handlePageChange = (page: number) => {
+    dispatch(setPage(page));
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -121,8 +117,7 @@ const UserTableContainer: React.FC = () => {
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
-            onPreviousPage={handlePreviousPage}
-            onNextPage={handleNextPage}
+            onPageChange={handlePageChange}
           />
         </>
       ) : (

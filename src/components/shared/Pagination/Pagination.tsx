@@ -1,22 +1,37 @@
 import React from 'react';
 import { PaginationProps } from '../interfaces/pagination.interface';
+import styles from './Pagination.module.scss';
 
 const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,
-  onPreviousPage,
-  onNextPage,
+  onPageChange,
 }) => {
   return (
-    <div>
-      <button onClick={onPreviousPage} disabled={currentPage === 1}>
+    <div className={styles.pagination}>
+      <button onClick={() => onPageChange(1)} disabled={currentPage === 1}>
+        &laquo;&laquo; First
+      </button>
+      <button
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+      >
         &laquo; Previous
       </button>
       <span>
         Page {currentPage} of {totalPages}
       </span>
-      <button onClick={onNextPage} disabled={currentPage === totalPages}>
+      <button
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+      >
         Next &raquo;
+      </button>
+      <button
+        onClick={() => onPageChange(totalPages)}
+        disabled={currentPage === totalPages}
+      >
+        Last &raquo;&raquo;
       </button>
     </div>
   );

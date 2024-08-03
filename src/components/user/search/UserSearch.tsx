@@ -1,5 +1,7 @@
 import React from 'react';
 import { UserSearchProps } from '../interfaces/user-search.interface';
+import { SearchInput } from './SearchInput';
+import { SearchKeySelect } from './SearchKeySelect';
 
 const UserSearch: React.FC<UserSearchProps> = ({
   searchTerm,
@@ -9,21 +11,12 @@ const UserSearch: React.FC<UserSearchProps> = ({
 }) => {
   return (
     <div style={{ display: 'flex', marginBottom: '10px' }}>
-      <input
-        type="text"
+      <SearchInput
         value={searchTerm}
-        onChange={(e) => onSearch(searchKey, e.target.value)}
+        onChange={(value) => onSearch(searchKey, value)}
         placeholder="Search..."
       />
-      <select value={searchKey} onChange={(e) => onKeyChange(e.target.value)}>
-        <option value="firstName">Имя</option>
-        <option value="lastName">Фамилия</option>
-        <option value="age">Возраст</option>
-        <option value="gender">Пол</option>
-        <option value="phone">Номер телефона</option>
-        <option value="address.city">Город</option>
-        <option value="address.address">Улица</option>
-      </select>
+      <SearchKeySelect value={searchKey} onChange={onKeyChange} />
     </div>
   );
 };

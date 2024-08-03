@@ -1,0 +1,13 @@
+@import 'src/variables';
+
+.searchKeySelect {
+  padding: 8px;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  font-size: 14px;
+
+  &:focus {
+    border-color: $primary-color;
+    outline: none;
+  }
+}

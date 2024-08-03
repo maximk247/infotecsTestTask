@@ -8,7 +8,11 @@ const UserTableBody: React.FC<UserTableBodyProps> = ({
   onRowClick,
   columnWidths,
 }) => {
-  const handleRowClick = (user: User) => () => {
+  const handleRowClick = (user: User) => (event: React.MouseEvent) => {
+    if (event.button !== 0) {
+      // Проверяем, что нажата левая кнопка мыши
+      return;
+    }
     const selection = window.getSelection();
     if (!selection || selection.toString().length === 0) {
       onRowClick(user);

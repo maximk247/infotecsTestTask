@@ -1,9 +1,12 @@
 {
+  "homepage": "https://maximk247.github.io/test-task/",
   "name": "test-task",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
@@ -37,6 +40,7 @@
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
+    "gh-pages": "^6.1.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
     "jsdom": "^24.1.1",

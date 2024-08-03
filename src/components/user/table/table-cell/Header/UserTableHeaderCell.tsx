@@ -20,7 +20,7 @@ const UserTableHeaderCell: React.FC<UserTableHeaderCellProps> = ({
     >
       <div className={styles.cellContent}>
         <span>{content}</span>
-        <span className={styles.sortArrow}>{sortArrow}</span>
+        <span>{sortArrow}</span>
       </div>
     </th>
   );

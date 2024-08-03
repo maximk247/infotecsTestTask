@@ -1,0 +1,15 @@
+@import 'src/variables';
+
+.searchInput {
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 200px;
+
+  &:focus {
+    border-color: $primary-color;
+    outline: none;
+  }
+}
