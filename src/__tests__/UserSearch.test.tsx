@@ -1,61 +1,55 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, fireEvent } from '@testing-library/react';
-import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { UserSearchProps } from '../components/user/interfaces/user-search.interface';
 import UserSearch from '../components/user/Search/UserSearch';
 
-describe('UserSearch', () => {
+describe('UserSearch Component', () => {
+  let props: UserSearchProps;
   const onSearch = vi.fn();
   const onKeyChange = vi.fn();
-  const searchTerm = 'John';
-  const searchKey = 'firstName';
 
   beforeEach(() => {
-    vi.clearAllMocks();
+    onSearch.mockClear();
+    onKeyChange.mockClear();
+    props = {
+      searchTerm: '',
+      searchKey: 'firstName',
+      onSearch,
+      onKeyChange,
+    };
   });
 
-  test('renders input and select elements correctly', () => {
-    const { getByPlaceholderText, getByDisplayValue } = render(
-      <UserSearch
-        searchTerm={searchTerm}
-        searchKey={searchKey}
-        onSearch={onSearch}
-        onKeyChange={onKeyChange}
-      />
+  it('renders correctly', () => {
+    const { getByPlaceholderText, getByRole } = render(
+      <UserSearch {...props} />
     );
-
     expect(getByPlaceholderText('Search...')).toBeInTheDocument();
-    expect(getByDisplayValue('John')).toBeInTheDocument();
-    expect(getByDisplayValue('Имя')).toBeInTheDocument();
+    expect(getByRole('combobox')).toBeInTheDocument();
   });
 
-  test('calls onSearch with correct arguments when input value changes', () => {
-    const { getByPlaceholderText } = render(
-      <UserSearch
-        searchTerm={searchTerm}
-        searchKey={searchKey}
-        onSearch={onSearch}
-        onKeyChange={onKeyChange}
-      />
-    );
-
-    fireEvent.change(getByPlaceholderText('Search...'), {
-      target: { value: 'Doe' },
-    });
-    expect(onSearch).toHaveBeenCalledWith('firstName', 'Doe');
+  it('calls onSearch with correct arguments when input changes', () => {
+    const { getByPlaceholderText } = render(<UserSearch {...props} />);
+    const input = getByPlaceholderText('Search...');
+    fireEvent.change(input, { target: { value: 'John' } });
+    expect(onSearch).toHaveBeenCalledWith('firstName', 'John');
   });
 
-  test('calls onKeyChange with correct arguments when select value changes', () => {
-    const { getByDisplayValue } = render(
-      <UserSearch
-        searchTerm={searchTerm}
-        searchKey={searchKey}
-        onSearch={onSearch}
-        onKeyChange={onKeyChange}
-      />
-    );
+  it('calls onKeyChange with correct argument when select changes', () => {
+    const { getByRole } = render(<UserSearch {...props} />);
+    const select = getByRole('combobox');
+    fireEvent.change(select, { target: { value: 'lastName' } });
+    expect(onKeyChange).toHaveBeenCalledWith('lastName');
+  });
 
-    fireEvent.change(getByDisplayValue('Имя'), {
-      target: { value: 'firstName' },
-    });
-    expect(onKeyChange).toHaveBeenCalledWith('firstName');
+  it('displays correct initial values', () => {
+    props.searchTerm = 'Jane';
+    props.searchKey = 'lastName';
+    const { getByPlaceholderText, getByRole } = render(
+      <UserSearch {...props} />
+    );
+    const input = getByPlaceholderText('Search...') as HTMLInputElement;
+    const select = getByRole('combobox') as HTMLSelectElement;
+    expect(input.value).toBe('Jane');
+    expect(select.value).toBe('lastName');
   });
 });

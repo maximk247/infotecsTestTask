@@ -1,14 +1,10 @@
-import { describe, it, expect, test } from 'vitest';
-import { render } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
+import { render } from './utils/test-utils'; // используем наш customRender
 import App from '../App';
 
-test('demo', () => {
-  expect(true).toBe(true);
-});
-
-describe('render', () => {
+describe('App rendering', () => {
   it('renders the main page', () => {
-    render(<App />);
-    expect(true).toBeTruthy();
+    const { getByText } = render(<App />);
+    expect(getByText('Имя')).toBeInTheDocument(); // пример проверки на наличие элемента
   });
 });

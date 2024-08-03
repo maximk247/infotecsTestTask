@@ -1,6 +1,5 @@
+import { describe, it, expect, vi } from 'vitest';
 import { render, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { UserTableBodyProps } from '../components/user/table/interfaces/user-table-body.interface';
 import UserTableBody from '../components/user/table/Body/UserTableBody';
 import { User } from '../components/user/interfaces/user.interface';
@@ -11,12 +10,9 @@ const users: User[] = [
     firstName: 'John',
     lastName: 'Doe',
     age: 30,
-    gender: 'male',
-    phone: '+1 234 567 890',
-    address: {
-      city: 'New York',
-      address: '123 Main St',
-    },
+    gender: 'Male',
+    phone: '+1 123 456 7890',
+    address: { city: 'New York', address: '123 Main St' },
     height: 0,
     weight: 0,
     email: '',
@@ -24,71 +20,56 @@ const users: User[] = [
   {
     id: 2,
     firstName: 'Jane',
-    lastName: 'Doe',
+    lastName: 'Smith',
     age: 25,
-    gender: 'female',
-    phone: '+1 987 654 321',
-    address: {
-      city: 'Los Angeles',
-      address: '456 Elm St',
-    },
+    gender: 'Female',
+    phone: '+1 987 654 3210',
+    address: { city: 'Los Angeles', address: '456 Elm St' },
     height: 0,
     weight: 0,
     email: '',
   },
 ];
 
-describe('UserTableBody', () => {
+const columnWidths = {
+  firstName: 150,
+  age: 100,
+  gender: 100,
+  phone: 150,
+  addressCity: 200,
+};
+
+describe('UserTableBody Component', () => {
   const onRowClick = vi.fn();
-  const columnWidths = {
-    firstName: 150,
-    age: 100,
-    gender: 100,
-    phone: 150,
-    addressCity: 200,
+
+  const props: UserTableBodyProps = {
+    users,
+    onRowClick,
+    columnWidths,
   };
 
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
-  const renderBody = (props: Partial<UserTableBodyProps> = {}) => {
-    const defaultProps: UserTableBodyProps = {
-      users,
-      onRowClick,
-      columnWidths,
-    };
-
-    return render(
-      <table>
-        <UserTableBody {...defaultProps} {...props} />
-      </table>
-    );
-  };
-
-  test('renders user data correctly', () => {
-    const { getByText } = renderBody();
-
+  it('renders correctly with provided users', () => {
+    const { getByText } = render(<UserTableBody {...props} />);
     expect(getByText('John Doe')).toBeInTheDocument();
-    expect(getByText('30')).toBeInTheDocument();
-    expect(getByText('male')).toBeInTheDocument();
-    expect(getByText('+1 234 567 890')).toBeInTheDocument();
-    expect(getByText('New York, 123 Main St')).toBeInTheDocument();
-
-    expect(getByText('Jane Doe')).toBeInTheDocument();
-    expect(getByText('25')).toBeInTheDocument();
-    expect(getByText('female')).toBeInTheDocument();
-    expect(getByText('+1 987 654 321')).toBeInTheDocument();
-    expect(getByText('Los Angeles, 456 Elm St')).toBeInTheDocument();
+    expect(getByText('Jane Smith')).toBeInTheDocument();
   });
 
-  test('calls onRowClick with correct user when row is clicked', () => {
-    const { getByText } = renderBody();
+  it('applies width and minWidth styles correctly', () => {
+    const { container } = render(<UserTableBody {...props} />);
+    const cells = container.querySelectorAll('td');
 
-    fireEvent.click(getByText('John Doe'));
+    expect(cells[0]).toHaveStyle(`max-width: ${columnWidths.firstName}px`);
+    expect(cells[1]).toHaveStyle(`max-width: ${columnWidths.age}px`);
+    expect(cells[2]).toHaveStyle(`max-width: ${columnWidths.gender}px`);
+    expect(cells[3]).toHaveStyle(`max-width: ${columnWidths.phone}px`);
+    expect(cells[4]).toHaveStyle(`max-width: ${columnWidths.addressCity}px`);
+  });
+
+  it('calls onRowClick when a row is clicked with left button', () => {
+    const { container } = render(<UserTableBody {...props} />);
+    const row = container.querySelectorAll('tr')[0];
+
+    fireEvent.mouseUp(row, { button: 0 });
     expect(onRowClick).toHaveBeenCalledWith(users[0]);
-
-    fireEvent.click(getByText('Jane Doe'));
-    expect(onRowClick).toHaveBeenCalledWith(users[1]);
   });
 });

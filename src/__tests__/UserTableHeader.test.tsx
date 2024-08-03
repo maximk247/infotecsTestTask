@@ -1,41 +1,24 @@
+import { describe, it, expect, vi } from 'vitest';
 import { render, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import { beforeEach, describe, expect, test, vi } from 'vitest';
-import { UserTableHeaderProps } from '../components/user/table/interfaces/user-table-header.interface';
 import UserTableHeader from '../components/user/table/Header/UserTableHeader';
+import { UserTableHeaderProps } from '../components/user/table/interfaces/user-table-header.interface';
 
-describe('UserTableHeader', () => {
-  const onSort = vi.fn();
-  const getSortArrow = vi.fn();
-  const columnWidths = {
-    firstName: 150,
-    age: 100,
-    gender: 100,
-    phone: 150,
-    addressCity: 200,
+
+describe('UserTableHeader Component', () => {
+  const props: UserTableHeaderProps = {
+    columnWidths: {
+      firstName: 150,
+      age: 100,
+      gender: 100,
+      phone: 150,
+      addressCity: 200,
+    },
+    onSort: vi.fn(),
+    getSortArrow: vi.fn((key: string) => key === 'firstName' ? '▲' : ''),
   };
 
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
-  const renderHeader = (props: Partial<UserTableHeaderProps> = {}) => {
-    const defaultProps: UserTableHeaderProps = {
-      columnWidths,
-      onSort,
-      getSortArrow,
-    };
-
-    return render(
-      <table>
-        <UserTableHeader {...defaultProps} {...props} />
-      </table>
-    );
-  };
-
-  test('renders table headers correctly', () => {
-    const { getByText } = renderHeader();
-
+  it('renders correctly with provided content', () => {
+    const { getByText } = render(<UserTableHeader {...props} />);
     expect(getByText('ФИО')).toBeInTheDocument();
     expect(getByText('Возраст')).toBeInTheDocument();
     expect(getByText('Пол')).toBeInTheDocument();
@@ -43,36 +26,40 @@ describe('UserTableHeader', () => {
     expect(getByText('Адрес')).toBeInTheDocument();
   });
 
-  test('calls onSort with correct key when header is clicked', () => {
-    const { getByText } = renderHeader();
+  it('applies width and minWidth styles correctly', () => {
+    const { container } = render(<UserTableHeader {...props} />);
+    const cells = container.querySelectorAll('th');
 
-    fireEvent.click(getByText('ФИО'));
-    expect(onSort).toHaveBeenCalledWith('firstName');
-
-    fireEvent.click(getByText('Возраст'));
-    expect(onSort).toHaveBeenCalledWith('age');
-
-    fireEvent.click(getByText('Пол'));
-    expect(onSort).toHaveBeenCalledWith('gender');
-
-    fireEvent.click(getByText('Адрес'));
-    expect(onSort).toHaveBeenCalledWith('address.city');
+    expect(cells[0]).toHaveStyle(`width: ${props.columnWidths.firstName}px`);
+    expect(cells[1]).toHaveStyle(`width: ${props.columnWidths.age}px`);
+    expect(cells[2]).toHaveStyle(`width: ${props.columnWidths.gender}px`);
+    expect(cells[3]).toHaveStyle(`width: ${props.columnWidths.phone}px`);
+    expect(cells[4]).toHaveStyle(`width: ${props.columnWidths.addressCity}px`);
   });
 
-  test('displays sort arrows correctly', () => {
-    getSortArrow.mockImplementation((key) => {
-      if (key === 'firstName') return '▲';
-      if (key === 'age') return '▼';
-      return '';
-    });
+  it('renders sort arrow correctly', () => {
+    const { container } = render(<UserTableHeader {...props} />);
+    const firstNameCell = container.querySelectorAll('th')[0];
+    expect(firstNameCell).toHaveTextContent('▲');
+  });
 
-    const { getByText } = renderHeader();
+  it('calls onSort when sortable headers are clicked', () => {
+    const { container } = render(<UserTableHeader {...props} />);
+    const firstNameCell = container.querySelectorAll('th')[0];
+    const ageCell = container.querySelectorAll('th')[1];
 
-    expect(getByText('ФИО').querySelector('.sort-arrow')).toHaveTextContent(
-      '▲'
-    );
-    expect(getByText('Возраст').querySelector('.sort-arrow')).toHaveTextContent(
-      '▼'
-    );
+    fireEvent.click(firstNameCell);
+    expect(props.onSort).toHaveBeenCalledWith('firstName');
+
+    fireEvent.click(ageCell);
+    expect(props.onSort).toHaveBeenCalledWith('age');
+  });
+
+  it('does not call onSort when non-sortable headers are clicked', () => {
+    const { container } = render(<UserTableHeader {...props} />);
+    const phoneCell = container.querySelectorAll('th')[3];
+
+    fireEvent.click(phoneCell);
+    expect(props.onSort).not.toHaveBeenCalledWith('phone');
   });
 });

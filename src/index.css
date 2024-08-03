@@ -1,0 +1,45 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: rgba(60, 174, 25, 0.87);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button {
+  border: none;
+  background-color: inherit;
+}
+
+.table-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border: 2px solid #c8c8c8;
+}
+
+.table th {
+  background-color: #e8e8e8;
+  cursor: pointer;
+}
+
+.table tbody tr:hover {
+  background-color: #f9f9f9;
+  cursor: pointer;
+}/*# sourceMappingURL=index.css.map */

@@ -23,11 +23,13 @@ const UserModal: React.FC = () => {
   return (
     <div
       className={styles.modalOverlay}
+      data-testid="modal-overlay"
       onClick={() => dispatch(setSelectedUser(null))}
     >
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <span
           className={styles.close}
+          data-testid="close-button"
           onClick={() => dispatch(setSelectedUser(null))}
         >
           &times;
