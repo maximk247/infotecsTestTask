@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserSearchProps } from './interfaces/user-search.interface';
+import { UserSearchProps } from '../interfaces/user-search.interface';
 
 const UserSearch: React.FC<UserSearchProps> = ({
   searchTerm,

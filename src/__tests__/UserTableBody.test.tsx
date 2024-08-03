@@ -1,8 +1,8 @@
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
-import { UserTableBodyProps } from '../components/user/userTable/interfaces/user-table-body.interface';
-import UserTableBody from '../components/user/userTable/UserTableBody';
+import { UserTableBodyProps } from '../components/user/table/interfaces/user-table-body.interface';
+import UserTableBody from '../components/user/table/body/UserTableBody';
 import { User } from '../components/user/interfaces/user.interface';
 
 const users: User[] = [

@@ -1,8 +1,8 @@
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
-import { UserTableHeaderProps } from '../components/user/userTable/interfaces/user-table-header.interface';
-import UserTableHeader from '../components/user/userTable/UserTableHeader';
+import { UserTableHeaderProps } from '../components/user/table/interfaces/user-table-header.interface';
+import UserTableHeader from '../components/user/table/header/UserTableHeader';
 
 describe('UserTableHeader', () => {
   const onSort = vi.fn();
