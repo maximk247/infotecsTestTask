@@ -2,7 +2,11 @@ import React from 'react';
 import { SearchInputProps } from '../interfaces/search-input.interface';
 import styles from './SearchInput.module.scss';
 
-const SearchInput: React.FC<SearchInputProps> = ({ value, onChange, placeholder }) => {
+const SearchInput: React.FC<SearchInputProps> = ({
+  value,
+  onChange,
+  placeholder,
+}) => {
   return (
     <input
       type="text"

@@ -1,6 +1,6 @@
 import React from 'react';
 import { UserTableBodyProps } from '../interfaces/user-table-body.interface';
-import UserTableBodyCell from '../table-cell/Body/UserTableBodyCell';
+import UserTableBodyCell from '../table-cell/CellBody/UserTableBodyCell';
 import { User } from '../../interfaces/user.interface';
 
 const UserTableBody: React.FC<UserTableBodyProps> = ({

@@ -1,8 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, fireEvent } from '@testing-library/react';
-import UserTableHeader from '../components/user/table/Header/UserTableHeader';
+import UserTableHeader from '../components/user/table/TableHeader/UserTableHeader';
 import { UserTableHeaderProps } from '../components/user/table/interfaces/user-table-header.interface';
-
 
 describe('UserTableHeader Component', () => {
   const props: UserTableHeaderProps = {
@@ -14,7 +13,7 @@ describe('UserTableHeader Component', () => {
       addressCity: 200,
     },
     onSort: vi.fn(),
-    getSortArrow: vi.fn((key: string) => key === 'firstName' ? '▲' : ''),
+    getSortArrow: vi.fn((key: string) => (key === 'firstName' ? '▲' : '')),
   };
 
   it('renders correctly with provided content', () => {

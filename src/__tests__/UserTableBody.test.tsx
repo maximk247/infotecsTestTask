@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, fireEvent } from '@testing-library/react';
 import { UserTableBodyProps } from '../components/user/table/interfaces/user-table-body.interface';
-import UserTableBody from '../components/user/table/Body/UserTableBody';
+import UserTableBody from '../components/user/table/TableBody/UserTableBody';
 import { User } from '../components/user/interfaces/user.interface';
 
 const users: User[] = [

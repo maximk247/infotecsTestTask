@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
 import { UserTableBodyCellProps } from '../components/user/table/table-cell/interfaces/user-table-body-cell.interface';
-import UserTableBodyCell from '../components/user/table/table-cell/Body/UserTableBodyCell';
+import UserTableBodyCell from '../components/user/table/table-cell/CellBody/UserTableBodyCell';
 import styles from '../components/user/table/table-cell/Body/UserTableBodyCell.module.scss';
 
 describe('UserTableBodyCell Component', () => {

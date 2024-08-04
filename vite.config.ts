@@ -12,4 +12,9 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['src/__tests__/setup.ts'],
   },
+  server: {
+    fs: {
+      cachedChecks: false
+    }
+  }
 });

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import UserSearch from '../components/user/Search/UserSearch';
-import UserTableHeader from '../components/user/table/Header/UserTableHeader';
-import UserTableBody from '../components/user/table/Body/UserTableBody';
+import UserTableHeader from '../components/user/table/TableHeader/UserTableHeader';
+import UserTableBody from '../components/user/table/TableBody/UserTableBody';
 import { RootState } from '../reducers';
 import {
   fetchUsers,
@@ -78,7 +78,7 @@ const UserTableContainer: React.FC = () => {
   // Переменные для работы с пагинацией
   const startIndex = (currentPage - 1) * itemsPerPage;
   const totalPages = Math.ceil(users.length / itemsPerPage);
-  
+
   // Отображение текущих пользователей
   const currentUsers = users.slice(startIndex, startIndex + itemsPerPage);
 

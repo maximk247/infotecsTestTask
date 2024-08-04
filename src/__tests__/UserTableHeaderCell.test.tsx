@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, fireEvent } from '@testing-library/react';
 import styles from '../components/user/table/table-cell/Header/UserTableHeader.module.scss';
 import { UserTableHeaderCellProps } from '../components/user/table/table-cell/interfaces/user-table-header-cell.interface';
-import UserTableHeaderCell from '../components/user/table/table-cell/Header/UserTableHeaderCell';
+import UserTableHeaderCell from '../components/user/table/table-cell/CellHeader/UserTableHeaderCell';
 
 describe('UserTableHeaderCell Component', () => {
   const props: UserTableHeaderCellProps = {
