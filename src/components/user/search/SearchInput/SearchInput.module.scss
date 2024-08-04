@@ -1,12 +1,12 @@
 @import 'src/variables';
 
 .searchInput {
+  width: 200px;
   padding: 8px;
   margin-right: 10px;
+  font-size: 14px;
   border: 1px solid $border-color;
   border-radius: 4px;
-  font-size: 14px;
-  width: 200px;
 
   &:focus {
     border-color: $primary-color;

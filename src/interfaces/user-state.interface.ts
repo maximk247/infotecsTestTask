@@ -1,5 +1,8 @@
 import { User } from '../components/user/interfaces/user.interface';
 
+/**
+ * Стейт пользователя для работы с redux
+ */
 export interface UserState {
   users: User[];
   unsortedUsers: User[];

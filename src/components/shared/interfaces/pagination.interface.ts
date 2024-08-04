@@ -1,3 +1,6 @@
+/**
+ * Пропсы для пагинации
+ */
 export interface PaginationProps {
   currentPage: number;
   totalPages: number;

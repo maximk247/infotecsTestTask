@@ -15,6 +15,7 @@ import {
 } from '../reducers/userSlice';
 import Pagination from '../components/shared/Pagination/Pagination';
 import { AppDispatch } from '../store';
+import { columnWidths } from '../consts/column-width.const';
 
 const UserTableContainer: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -37,12 +38,14 @@ const UserTableContainer: React.FC = () => {
     }
   }, [dispatch, searchTerm, searchKey]);
 
+  // Обновляет поисковый запрос и ключ, а также сбрасывает страницу на первую.
   const handleSearch = (searchKey: string, value: string) => {
     dispatch(setSearchTerm(value));
     dispatch(setSearchKey(searchKey));
     dispatch(setPage(1));
   };
 
+  // Контроль сортировки под логическую часть для работы с redux
   const requestSort = (key: string) => {
     let direction: 'asc' | 'desc' | '' = 'asc';
     if (sortConfig.key === key && sortConfig.direction === 'asc') {
@@ -55,6 +58,7 @@ const UserTableContainer: React.FC = () => {
     dispatch(setSortConfig({ key, direction }));
   };
 
+  // Визуальный контроль сортировки (стрелки или их отсутствие)
   const getSortArrow = (key: string) => {
     if (sortConfig.key === key) {
       if (sortConfig.direction === 'asc') {
@@ -66,13 +70,17 @@ const UserTableContainer: React.FC = () => {
     return '';
   };
 
+  // Контроль пагинации
   const handlePageChange = (page: number) => {
     dispatch(setPage(page));
   };
 
+  // Переменные для работы с пагинацией
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentUsers = users.slice(startIndex, startIndex + itemsPerPage);
   const totalPages = Math.ceil(users.length / itemsPerPage);
+  
+  // Отображение текущих пользователей
+  const currentUsers = users.slice(startIndex, startIndex + itemsPerPage);
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -92,25 +100,13 @@ const UserTableContainer: React.FC = () => {
         <>
           <table className="table">
             <UserTableHeader
-              columnWidths={{
-                firstName: 150,
-                age: 100,
-                gender: 100,
-                phone: 150,
-                addressCity: 200,
-              }}
+              columnWidths={columnWidths}
               onSort={requestSort}
               getSortArrow={getSortArrow}
             />
             <UserTableBody
               users={currentUsers}
-              columnWidths={{
-                firstName: 150,
-                age: 100,
-                gender: 100,
-                phone: 150,
-                addressCity: 200,
-              }}
+              columnWidths={columnWidths}
               onRowClick={(user) => dispatch(setSelectedUser(user))}
             />
           </table>

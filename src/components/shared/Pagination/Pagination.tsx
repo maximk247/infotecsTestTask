@@ -2,6 +2,7 @@ import React from 'react';
 import { PaginationProps } from '../interfaces/pagination.interface';
 import styles from './Pagination.module.scss';
 
+//Использовал библиотеку svgr, превращающую svg в реакт-компоненты
 import PreviousIcon from '../../../assets//svg/line-angle-left-icon.svg?react';
 import EndIcon from '../../../assets/svg/arrow-end-left-icon.svg?react';
 

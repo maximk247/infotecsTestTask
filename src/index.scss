@@ -2,31 +2,31 @@
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
   font-weight: 400;
+  line-height: 1.5;
   color: $primary-color;
   font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  margin: 0;
 }
 
 button {
-  border: none;
   background-color: inherit;
+  border: none;
 }
 
 .table-container {
-  max-width: 1200px;
   width: 100%;
-  margin: 0 auto;
+  max-width: 1200px;
   padding: 20px;
+  margin: 0 auto;
 }
 
 .table {
@@ -37,11 +37,11 @@ button {
 }
 
 .table th {
-  background-color: $table-header-bg;
   cursor: pointer;
+  background-color: $table-header-bg;
 }
 
 .table tbody tr:hover {
-  background-color: $row-hover-bg;
   cursor: pointer;
+  background-color: $row-hover-bg;
 }

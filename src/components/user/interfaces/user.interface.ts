@@ -1,3 +1,6 @@
+/**
+ * Интерфейс пользователя
+ */
 export interface User {
   id: number;
   firstName: string;
@@ -11,6 +14,9 @@ export interface User {
   email: string;
 }
 
+/**
+ * Вспомогательный интерфейс под адрес
+ */
 interface Address {
   address: string;
   city: string;

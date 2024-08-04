@@ -1,3 +1,6 @@
+/**
+ * Пропсы поиска пользователя
+ */
 export interface UserSearchProps {
   searchTerm: string;
   searchKey: string;
