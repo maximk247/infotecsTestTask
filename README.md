@@ -2,7 +2,7 @@
 
 Что еще используется: Prettier, Stylelint, Eslint, husky + lint-staged. Немного написано unit-тестов на Jest.
 
-** Инструкция запуска **
+**Инструкция запуска**
 
 ```bash
 git clone https://github.com/maximk247/infotecsTestTask.git
